@@ -24,7 +24,11 @@ class MazeReader {
      *
      * @param file
      */
-    public void readFile(String file){
+    public boolean[][] readFile(String file){
         //TODO implement way to read file into memory
+
+        return null;
+
+
     }
 }

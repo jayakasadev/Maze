@@ -1,6 +1,5 @@
 package Util;
 
-@Deprecated
 /**
  * Node representation of a maze location
  *
