@@ -1,0 +1,75 @@
+Expected to use AStar search
+AStar:
+    Informed Search
+        -   use of hueristics to guide the search tree towards areas more likely to reach the goal
+        -   h(n) is used to estimate how far the node n is from the goal
+            -   estimated cost of the least cost path from the node n to the goal
+        -   need hueristic to the goal and the cost from the start
+            -   at any node, cost to reach goal from node is sum of
+                -   cost to reach node from start
+                -   cost of actions to reach goal from node
+            -   f(n) = g(n) + h(n)
+                -   f => eval function
+                -   g => cost from start
+                -   h => cost to goal
+                    -   for all n, h(n) <= true_cost(n, goal)
+                    -   hueristic is good if the hueristic at node is less than sum of hueristic of child and true cost to reach goal
+                        -   h(n) <= true_cost(n, goal) + h(child)
+
+astar_search ( start, goal )
+    open_list = {start}
+    closed_list = {}
+    while !open_list.empty()
+        current_node = open_list.pop() //Pops element with minimum f value
+        if is_goal( current_node )
+            return true
+        closed_list.add( current_node )
+        foreach n in neighbors_of( current_node ) and n not in closed_list
+            n.g = current_node.g + cost( current_node, n )
+            n.f = n.g + h( n ) //New search node is updated with correct values
+            n.parent = current_node
+            if n.state not in open_list //State has been encountered for the first time
+                open_list.add( n )
+            else
+                open_n = open_list.find( n.state )
+            if n.f < open_n.f //Only update node if a better way to get to the state was found
+                update_node( open_n, n )
+    return false
+
+Resources:
+https://courses.cs.washington.edu/courses/cse326/09sp/projects/proj2/t2.html
+https://theory.stanford.edu/%7Eamitp/GameProgramming/Heuristics.html
+
+
+Data Representation:
+    Can use a boolean array => Adjacency Matrix ##USED THIS##
+        -   true = .
+        -   false = #
+        -   uses extra memory to store obstacles
+        -   simplest to setup from a text file represenatation of maze
+        -   fastest to setup
+
+    Can use a list => Adjacency list
+        -   (xj, yi) => neighbors that you can move to
+        -   saves space such that you will not need to store any obstacles
+        -   hard to setup from a test file representation of maze
+        -   save time on looking up legal neighbors
+        -   takes a very long time to setup
+
+
+
+Hueristics:
+
+Will use Manhattan Distance from goal for hueristic
+The Manhattan distance is a fast-to-compute and surprisingly accurate measurement of how likely a MazeCell will be on the path
+to the exit. Geometrically, the Manhattan distance is distance between two points if you were only allowed to walk on paths
+that were at 90-degree angles from each other (similar to walking the streets of Manhattan). Mathematically, the Manhattan
+distance is:
+
+| xj - xf | + | yi - yf | for y0 <= i <= yf and x0 <= j <= xf
+
+(Sometimes, the Manhattan distance is scaled up by a constant factor, to ensure unique values for each cell.)
+The end result is that best first search will visit what it thinks are the most promising cells first, which gives best first some
+of the nice properties of both BFS and DFS. However, this leaves best first search vulnerable to bad heuristics, or certain types
+of mazes which exploit weaknesses of certain heuristics.
+
