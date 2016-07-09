@@ -59,10 +59,10 @@ public class Maze {
             MazeNode curr = open.pop();
             int x = curr.getX();
             int y = curr.getY();
+            close.add(curr);
             if(x == finishx && y == finishy){
                 return;
             }
-            close.add(curr);
             short nullcount = 0;
             MazeNode[] neighbors = getNeighbors(curr);
             for(MazeNode n : neighbors){
@@ -174,9 +174,13 @@ public class Maze {
     }
 
     public static void main(String ... args){
+        System.out.println("Solving multipath.txt");
         new Maze("multipath").printPath();
+        System.out.println("Solving smallmaze.txt");
         new Maze("smallmaze").printPath();
+        System.out.println("Solving maze_No_1.txt");
         new Maze("maze_No_1.txt").printPath();
+        System.out.println("Solving maze_No_2.txt");
         new Maze("maze_No_2.txt").printPath();
     }
 }
