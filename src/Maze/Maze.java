@@ -117,9 +117,11 @@ public class Maze {
         }
         path.add(curr);
         System.out.println("Path for current maze took " + path.size() + " moves.");
+        System.out.print("[ ");
         while(!path.empty()){
-            System.out.println(path.pop());
+            System.out.print(path.pop() + " ");
         }
+        System.out.println("]");
     }
 
     /**
