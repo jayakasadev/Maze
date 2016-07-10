@@ -1,7 +1,5 @@
 package BFS;
 
-import Util.MazeNode;
-import Util.MazeReader;
 import Util.TestNode;
 import Util.TestReader;
 
