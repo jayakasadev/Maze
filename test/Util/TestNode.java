@@ -83,6 +83,6 @@ public class TestNode implements Comparable{
         }
         return "Black";
         */
-        return "(" + x +", " + y + ")";
+        return "(" + (x+1) +", " + (y+1) + ")";
     }
 }

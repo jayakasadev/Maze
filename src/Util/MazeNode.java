@@ -89,7 +89,7 @@ public class MazeNode implements Comparable{
 
     @Override
     public String toString() {
-        return "(" + x + ", " + y + ")";
+        return "(" + (x+1) + ", " + (y+1) + ")";
     }
 
     @Override
