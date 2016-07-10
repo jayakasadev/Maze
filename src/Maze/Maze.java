@@ -63,7 +63,6 @@ public class Maze {
             if(x == finishx && y == finishy){
                 return;
             }
-            short nullcount = 0;
             MazeNode[] neighbors = getNeighbors(curr);
             for(MazeNode n : neighbors){
                 if(n == null){
@@ -116,7 +115,7 @@ public class Maze {
             curr = curr.getParent();
         }
         path.add(curr);
-        System.out.println("Path for current maze took " + path.size() + " moves.");
+        System.out.println("Path for current maze took " + (path.size()-1) + " moves.");
         System.out.print("[ ");
         while(!path.empty()){
             System.out.print(path.pop() + " ");
