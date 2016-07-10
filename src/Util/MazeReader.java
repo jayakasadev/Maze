@@ -1,6 +1,7 @@
 package Util;
 
 import java.io.BufferedReader;
+import java.io.IOException;
 import java.nio.charset.StandardCharsets;
 import java.nio.file.FileSystems;
 import java.nio.file.Files;
@@ -20,7 +21,7 @@ public class MazeReader {
      *
      * @param file
      */
-    public static MazeNode[][] readFile(String file){
+    public static MazeNode[][] readFile(String file) throws IOException {
         List<Integer> cols = new LinkedList<>();
         int rows = 0;
         Path path = FileSystems.getDefault().getPath("data", file);
@@ -32,8 +33,8 @@ public class MazeReader {
                 cols.add(s.length());
             }
         } catch (java.io.IOException e) {
-            System.err.println(e.getCause());
-            return null;
+            System.err.println("Problem reading file " + file + "\nCause: " + e.getCause());
+            throw e;
         }
 
         //System.out.println(rows);

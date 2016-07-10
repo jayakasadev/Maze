@@ -3,6 +3,7 @@ package Maze;
 import Util.MazeNode;
 import Util.MazeReader;
 
+import java.io.IOException;
 import java.util.Deque;
 import java.util.LinkedList;
 import java.util.Queue;
@@ -24,13 +25,22 @@ public class Maze {
     private Stack<MazeNode> close = new Stack<>();
 
     Maze(String filename){
-        maze = MazeReader.readFile(filename);
+        try {
+            maze = MazeReader.readFile(filename);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        //System.out.println(maze);
         finishx = maze.length-1;
         finishy = maze[finishx].length-1;
     }
 
     Maze(String filename, int finishx, int finishy){
-        maze = MazeReader.readFile(filename);
+        try {
+            maze = MazeReader.readFile(filename);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
 
         finishx--;
         finishy--;
@@ -195,21 +205,24 @@ public class Maze {
     }
 
     public static void main(String ... args){
+        /*
         System.out.println("Solving multipath.txt");
-        new Maze("multipath").printPath();
+        new Maze("multipath.txt").printPath();
         System.out.println("Solving smallmaze.txt");
-        new Maze("smallmaze").printPath();
+        new Maze("smallmaze.txt").printPath();
+        */
         System.out.println("Solving maze_No_1.txt");
         new Maze("maze_No_1.txt").printPath();
         System.out.println("Solving maze_No_2.txt");
         new Maze("maze_No_2.txt").printPath();
 
+        /*
         System.out.println("\n\nSolving Maze with custom start locations");
 
         System.out.println("Solving multipath.txt");
-        new Maze("multipath").printPath(2, 1);
+        new Maze("multipath.txt").printPath(2, 1);
         System.out.println("Solving smallmaze.txt");
-        new Maze("smallmaze").printPath(2, 1);
+        new Maze("smallmaze.txt").printPath(2, 1);
         System.out.println("Solving maze_No_1.txt");
         new Maze("maze_No_1.txt").printPath(10, 17);
         System.out.println("Solving maze_No_2.txt");
@@ -218,12 +231,14 @@ public class Maze {
         System.out.println("\n\nSolving Maze with custom finish locations");
 
         System.out.println("Solving multipath.txt");
-        new Maze("multipath", 3, 1).printPath();
+        new Maze("multipath.txt", 3, 1).printPath();
         System.out.println("Solving smallmaze.txt");
-        new Maze("smallmaze", 3 ,1).printPath();
+        new Maze("smallmaze.txt", 3 ,1).printPath();
         System.out.println("Solving maze_No_1.txt");
         new Maze("maze_No_1.txt", 92, 87).printPath();
         System.out.println("Solving maze_No_2.txt");
         new Maze("maze_No_2.txt", 92, 87).printPath();
+
+        */
     }
 }

@@ -121,17 +121,18 @@ public class MazeShortestPath {
     }
 
     public static void main(String ... args){
+        /*
         System.out.println("Solving smallmaze.txt");
         new MazeShortestPath(TestReader.readFile("smallmaze")).solve();
         System.out.println("Solving multipath.txt");
         new MazeShortestPath(TestReader.readFile("multipath")).solve();
+        */
         System.out.println("Solving maze_No_1.txt");
         new MazeShortestPath(TestReader.readFile("maze_No_1.txt")).solve();
         System.out.println("Solving maze_No_2.txt");
         new MazeShortestPath(TestReader.readFile("maze_No_2.txt")).solve();
 
-
-
+        /*
         System.out.println("\n\nSolving for custom start postions");
         System.out.println("Solving smallmaze.txt");
         new MazeShortestPath(TestReader.readFile("smallmaze"), 3, 3, 2, 1).solve();
@@ -151,5 +152,6 @@ public class MazeShortestPath {
         new MazeShortestPath(TestReader.readFile("maze_No_1.txt"), 92, 87).solve();
         System.out.println("Solving maze_No_2.txt");
         new MazeShortestPath(TestReader.readFile("maze_No_2.txt"), 92, 87).solve();
+        */
     }
 }
