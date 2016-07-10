@@ -75,13 +75,18 @@ public class TestNode implements Comparable{
     @Override
     public String toString() {
         /*
+        String out = "";
         if(color == Color.White){
-            return "White";
+            out += "White";
         }
-        if(color == Color.Gray){
-            return "Gray";
+        else if(color == Color.Gray){
+            out += "Gray";
         }
-        return "Black";
+        else {
+            out += "Black";
+        }
+
+        return out + "(" + (x+1) +", " + (y+1) + ")";
         */
         return "(" + (x+1) +", " + (y+1) + ")";
     }

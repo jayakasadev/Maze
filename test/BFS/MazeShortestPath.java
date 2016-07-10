@@ -47,14 +47,19 @@ public class MazeShortestPath {
         if(maze[x][y] == null){
             System.err.println("Maze is unsolvable. The Goal Position is a barrier, which is an illegal goal position.");
         }
-        BFS(maze, maze[startx][starty], maze[x][y]);
+        //System.out.println(maze[startx][starty]);
+        //System.out.println(maze[x][y]);
+        BFS(maze, maze[startx][starty]);
         Stack<TestNode> path = new Stack<>();
         TestNode node = maze[x][y];
+        //System.out.println(node);
+        //System.out.println(node.compareTo(maze[startx][starty]) != 0);
         System.out.println("Calculated Shortest path takes " + node.getD() + " steps.");
         while(node.compareTo(maze[startx][starty]) != 0){
             //System.out.println(node.getD());
             path.add(node);
             node = node.getParent();
+            //System.out.println("Parent" + node);
             //System.out.println(node.getX() != 0 && node.getY() != 0);
         }
         path.add(node);
@@ -66,15 +71,18 @@ public class MazeShortestPath {
         System.out.println(" ]");
     }
 
-    private void BFS(TestNode[][] maze, TestNode start, TestNode finish){
+    private void BFS(TestNode[][] maze, TestNode start){
         start.setColor(TestNode.Color.Gray);
         Queue<TestNode> queue = new LinkedList<>();
         queue.add(start);
-
+        TestNode curr = null;
         while(!queue.isEmpty()){
-            TestNode curr = queue.remove();
+            curr = queue.remove();
+            //System.out.println(curr + " parent is " + curr.getParent());
             TestNode[] neighbors = neighbors(curr);
+            int count = 0;
             for(TestNode t : neighbors){
+                //System.out.println(count++ + " "  + t);
                 if(t != null && t.getColor() == TestNode.Color.White){
                     t.setColor(TestNode.Color.Gray);
                     t.setDistance(curr.getD()+1);
@@ -84,6 +92,7 @@ public class MazeShortestPath {
             }
             curr.setColor(TestNode.Color.Black);
         }
+        System.out.println("Last visited node was" + curr);
 
     }
 
@@ -93,28 +102,20 @@ public class MazeShortestPath {
         int y = curr.getY();
         TestNode[] neighbors = new TestNode[4];
         if(x-1 > 0){
+            //System.out.println("A");
             neighbors[0] = maze[x-1][y];
-            if(curr != null && neighbors[0] != null && (curr.getParent() != null && neighbors[0].compareTo(curr.getParent()) == 0)){
-                neighbors[0] = null;
-            }
         }
         if(x+1 < maze.length){
+            //System.out.println("B");
             neighbors[1] = maze[x+1][y];
-            if(curr != null && neighbors[1] != null && (curr.getParent() != null && neighbors[1].compareTo(curr.getParent()) == 0)){
-                neighbors[1] = null;
-            }
         }
         if(y-1 > 0){
+            //System.out.println("C");
             neighbors[2] = maze[x][y-1];
-            if(curr != null && neighbors[2] != null && (curr.getParent() != null && neighbors[2].compareTo(curr.getParent()) == 0)){
-                neighbors[2] = null;
-            }
         }
         if(y+1 < maze[x].length){
+            //System.out.println("D");
             neighbors[3] = maze[x][y+1];
-            if(curr != null && neighbors[3] != null && (curr.getParent() != null && neighbors[3].compareTo(curr.getParent()) == 0)){
-                neighbors[3] = null;
-            }
         }
 
         return neighbors;
@@ -126,23 +127,24 @@ public class MazeShortestPath {
         new MazeShortestPath(TestReader.readFile("smallmaze")).solve();
         System.out.println("Solving multipath.txt");
         new MazeShortestPath(TestReader.readFile("multipath")).solve();
-        */
+
         System.out.println("Solving maze_No_1.txt");
         new MazeShortestPath(TestReader.readFile("maze_No_1.txt")).solve();
         System.out.println("Solving maze_No_2.txt");
         new MazeShortestPath(TestReader.readFile("maze_No_2.txt")).solve();
-
+        */
         /*
         System.out.println("\n\nSolving for custom start postions");
         System.out.println("Solving smallmaze.txt");
         new MazeShortestPath(TestReader.readFile("smallmaze"), 3, 3, 2, 1).solve();
         System.out.println("Solving multipath.txt");
         new MazeShortestPath(TestReader.readFile("multipath"), 3, 4, 2, 1).solve();
+        */
         System.out.println("Solving maze_No_1.txt");
-        new MazeShortestPath(TestReader.readFile("maze_No_1.txt"), 101, 101, 10, 17).solve();
+        new MazeShortestPath(TestReader.readFile("maze_No_1.txt"), 78, 47, 1, 1).solve();
         System.out.println("Solving maze_No_2.txt");
-        new MazeShortestPath(TestReader.readFile("maze_No_2.txt"), 101, 101, 10, 17).solve();
-
+        new MazeShortestPath(TestReader.readFile("maze_No_2.txt"), 101, 101, 1, 53).solve();
+        /*
         System.out.println("\n\nSolving for custom finish postions");
         System.out.println("Solving smallmaze.txt");
         new MazeShortestPath(TestReader.readFile("smallmaze"), 3 , 1).solve();

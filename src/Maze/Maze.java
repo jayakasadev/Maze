@@ -195,13 +195,14 @@ public class Maze {
 
     /**
      * Hueristic Evaluation function
+     * Euclidean Distance
      *
      * @param x
      * @param y
      */
     private double h(int x, int y){
         //consider merging the h and g methods into this one
-        return Math.sqrt((finishx - x)*(finishx - x) + (finishy - y)*(finishy - y));
+        return Math.sqrt(Math.abs(finishx - x)*Math.abs(finishx - x) + Math.abs(finishy - y)*Math.abs(finishy - y));
     }
 
     public static void main(String ... args){
@@ -210,12 +211,12 @@ public class Maze {
         new Maze("multipath.txt").printPath();
         System.out.println("Solving smallmaze.txt");
         new Maze("smallmaze.txt").printPath();
-        */
+
         System.out.println("Solving maze_No_1.txt");
         new Maze("maze_No_1.txt").printPath();
         System.out.println("Solving maze_No_2.txt");
         new Maze("maze_No_2.txt").printPath();
-
+        */
         /*
         System.out.println("\n\nSolving Maze with custom start locations");
 
@@ -223,11 +224,13 @@ public class Maze {
         new Maze("multipath.txt").printPath(2, 1);
         System.out.println("Solving smallmaze.txt");
         new Maze("smallmaze.txt").printPath(2, 1);
+        */
         System.out.println("Solving maze_No_1.txt");
-        new Maze("maze_No_1.txt").printPath(10, 17);
+        new Maze("maze_No_1.txt", 78, 47).printPath(1, 1);
         System.out.println("Solving maze_No_2.txt");
-        new Maze("maze_No_2.txt").printPath(10, 17);
+        new Maze("maze_No_2.txt",1 , 53).printPath(101, 101);
 
+        /*
         System.out.println("\n\nSolving Maze with custom finish locations");
 
         System.out.println("Solving multipath.txt");
