@@ -2,6 +2,8 @@ Output is in the output directory.
 The solution using Astar search is in the solution.txt file.
 The solution using BFS to verify the AStar search is in bfssearch.txt
 
+##Built Using Java 8##
+
 Compiling Code in src Folder:
 From the Maze Directory:
 ##Make sure the data, notes, src, test directories are visible in current path##
