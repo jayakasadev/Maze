@@ -16,7 +16,18 @@ import java.util.Stack;
 public class MazeShortestPath {
     private int finishx = 0;
     private int finishy = 0;
+    private int startx = 0;
+    private int starty = 0;
     TestNode[][] maze = null;
+
+    MazeShortestPath(TestNode[][] maze, int finishx, int finishy, int startx, int starty){
+        this.maze = maze;
+        this.startx = --startx;
+        this.starty = --starty;
+        this.finishx = --finishx;
+        this.finishy = --finishy;
+    }
+
 
     MazeShortestPath(TestNode[][] maze, int finishx, int finishy){
         this.maze = maze;
@@ -36,11 +47,11 @@ public class MazeShortestPath {
         if(maze[x][y] == null){
             System.err.println("Maze is unsolvable. The Goal Position is a barrier, which is an illegal goal position.");
         }
-        BFS(maze, maze[0][0], maze[x][y]);
+        BFS(maze, maze[startx][starty], maze[x][y]);
         Stack<TestNode> path = new Stack<>();
         TestNode node = maze[x][y];
         System.out.println("Calculated Shortest path takes " + node.getD() + " steps.");
-        while(node.compareTo(maze[0][0]) != 0){
+        while(node.compareTo(maze[startx][starty]) != 0){
             //System.out.println(node.getD());
             path.add(node);
             node = node.getParent();
@@ -119,7 +130,19 @@ public class MazeShortestPath {
         System.out.println("Solving maze_No_2.txt");
         new MazeShortestPath(TestReader.readFile("maze_No_2.txt")).solve();
 
-        System.out.println("Solving for custom finish postions");
+
+
+        System.out.println("\n\nSolving for custom start postions");
+        System.out.println("Solving smallmaze.txt");
+        new MazeShortestPath(TestReader.readFile("smallmaze"), 3, 3, 2, 1).solve();
+        System.out.println("Solving multipath.txt");
+        new MazeShortestPath(TestReader.readFile("multipath"), 3, 4, 2, 1).solve();
+        System.out.println("Solving maze_No_1.txt");
+        new MazeShortestPath(TestReader.readFile("maze_No_1.txt"), 101, 101, 10, 17).solve();
+        System.out.println("Solving maze_No_2.txt");
+        new MazeShortestPath(TestReader.readFile("maze_No_2.txt"), 101, 101, 10, 17).solve();
+
+        System.out.println("\n\nSolving for custom finish postions");
         System.out.println("Solving smallmaze.txt");
         new MazeShortestPath(TestReader.readFile("smallmaze"), 3 , 1).solve();
         System.out.println("Solving multipath.txt");

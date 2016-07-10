@@ -99,13 +99,26 @@ public class Maze {
      * @param x
      * @param y
      */
-    void printPath(short x, short y){
-        this.startx = x;
-        this.starty = y;
+    void printPath(int x, int y){
+        this.startx = --x;
+        this.starty = --y;
         if(maze[x][y] == null){
             throw new IllegalArgumentException("Illegal Start Position");
         }
         solve();
+        Stack<MazeNode> path = new Stack<>();
+        MazeNode curr = close.pop();
+        while(curr.compareTo(maze[startx][starty]) != 0){
+            path.add(curr);
+            curr = curr.getParent();
+        }
+        path.add(curr);
+        System.out.println("Path for current maze took " + (path.size()-1) + " moves.");
+        System.out.print("[ ");
+        while(!path.empty()){
+            System.out.print(path.pop() + " ");
+        }
+        System.out.println("]");
     }
 
     /**
@@ -191,8 +204,18 @@ public class Maze {
         System.out.println("Solving maze_No_2.txt");
         new Maze("maze_No_2.txt").printPath();
 
+        System.out.println("\n\nSolving Maze with custom start locations");
 
-        System.out.println("Solving Maze with custom finish locations");
+        System.out.println("Solving multipath.txt");
+        new Maze("multipath").printPath(2, 1);
+        System.out.println("Solving smallmaze.txt");
+        new Maze("smallmaze").printPath(2, 1);
+        System.out.println("Solving maze_No_1.txt");
+        new Maze("maze_No_1.txt").printPath(10, 17);
+        System.out.println("Solving maze_No_2.txt");
+        new Maze("maze_No_2.txt").printPath(10, 17);
+
+        System.out.println("\n\nSolving Maze with custom finish locations");
 
         System.out.println("Solving multipath.txt");
         new Maze("multipath", 3, 1).printPath();
