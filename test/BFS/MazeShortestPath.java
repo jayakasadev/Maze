@@ -14,15 +14,25 @@ import java.util.Stack;
  * @version 1.0
  */
 public class MazeShortestPath {
+    private int finishx = 0;
+    private int finishy = 0;
     TestNode[][] maze = null;
+
+    MazeShortestPath(TestNode[][] maze, int finishx, int finishy){
+        this.maze = maze;
+        this.finishx = --finishx;
+        this.finishy = --finishy;
+    }
 
     MazeShortestPath(TestNode[][] maze){
         this.maze = maze;
+        this.finishx = maze.length-1;
+        this.finishy = maze[finishx].length-1;
     }
 
     void solve(){
-        int x = maze.length-1;
-        int y = maze[x].length-1;
+        int x = finishx;
+        int y = finishy;
         if(maze[x][y] == null){
             System.err.println("Maze is unsolvable. The Goal Position is a barrier, which is an illegal goal position.");
         }
@@ -108,5 +118,15 @@ public class MazeShortestPath {
         new MazeShortestPath(TestReader.readFile("maze_No_1.txt")).solve();
         System.out.println("Solving maze_No_2.txt");
         new MazeShortestPath(TestReader.readFile("maze_No_2.txt")).solve();
+
+        System.out.println("Solving for custom finish postions");
+        System.out.println("Solving smallmaze.txt");
+        new MazeShortestPath(TestReader.readFile("smallmaze"), 3 , 1).solve();
+        System.out.println("Solving multipath.txt");
+        new MazeShortestPath(TestReader.readFile("multipath"), 3 , 1).solve();
+        System.out.println("Solving maze_No_1.txt");
+        new MazeShortestPath(TestReader.readFile("maze_No_1.txt"), 92, 87).solve();
+        System.out.println("Solving maze_No_2.txt");
+        new MazeShortestPath(TestReader.readFile("maze_No_2.txt"), 92, 87).solve();
     }
 }

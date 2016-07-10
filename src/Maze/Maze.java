@@ -32,17 +32,23 @@ public class Maze {
     Maze(String filename, int finishx, int finishy){
         maze = MazeReader.readFile(filename);
 
-        int maxx = maze.length-1;
-        int maxy = maze[finishx].length-1;
+        finishx--;
+        finishy--;
 
-        if(finishx > 0 && finishx <= maxx){
+        int maxx = maze.length-1;
+        int maxy = maze[maxx].length-1;
+
+        //System.out.println(finishx + " " + maxx);
+        //System.out.println(finishy + " " + maxy);
+
+        if(finishx >= 0 && finishx <= maxx){
             this.finishx = finishx;
         }
         else{
             throw new IllegalArgumentException("Goal x Position is out of bounds of maze.");
         }
 
-        if(finishy > 0 && finishy <= maxy){
+        if(finishy >= 0 && finishy <= maxy){
             this.finishy = finishy;
         }
         else{
@@ -96,6 +102,9 @@ public class Maze {
     void printPath(short x, short y){
         this.startx = x;
         this.starty = y;
+        if(maze[x][y] == null){
+            throw new IllegalArgumentException("Illegal Start Position");
+        }
         solve();
     }
 
@@ -181,5 +190,17 @@ public class Maze {
         new Maze("maze_No_1.txt").printPath();
         System.out.println("Solving maze_No_2.txt");
         new Maze("maze_No_2.txt").printPath();
+
+
+        System.out.println("Solving Maze with custom finish locations");
+
+        System.out.println("Solving multipath.txt");
+        new Maze("multipath", 3, 1).printPath();
+        System.out.println("Solving smallmaze.txt");
+        new Maze("smallmaze", 3 ,1).printPath();
+        System.out.println("Solving maze_No_1.txt");
+        new Maze("maze_No_1.txt", 92, 87).printPath();
+        System.out.println("Solving maze_No_2.txt");
+        new Maze("maze_No_2.txt", 92, 87).printPath();
     }
 }
